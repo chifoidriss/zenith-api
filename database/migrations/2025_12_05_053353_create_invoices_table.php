@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('status')->default(false); // Paid or not
             $table->string('document')->nullable();
             $table->text('notes')->nullable();
+            $table->string('label')->nullable();
             $table->timestamps();
         });
     }

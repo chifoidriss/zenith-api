@@ -34,6 +34,8 @@ Route::prefix('auth')->group(function () {
 
     // Webhook route
     Route::post('/webhook', WebhookController::class)->name('auth.webhook');
+
+    Route::post('login', 'App\Http\Controllers\AuthController@login');
 });
 
 Route::middleware(['auth:sanctum', 'log'])
@@ -43,7 +45,7 @@ Route::middleware(['auth:sanctum', 'log'])
 
     Route::get('countries', 'Account\AccountController@countries');
     Route::get('print/{type}/{id}', 'ExportController@printToPDF');
-    
+
     foreach ($pages as $filename) {
         if (Str::endsWith($filename, '.php')) {
             require base_path("routes/modules/$filename");

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->date('payment_date')->nullable();
             $table->double('amount')->nullable();
             $table->boolean('status')->default(0);
+            $table->string('label')->nullable();
             $table->timestamps();
         });
     }

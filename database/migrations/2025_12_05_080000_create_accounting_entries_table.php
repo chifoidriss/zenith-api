@@ -27,6 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('warehouse_id')->nullable();
             $table->unsignedBigInteger('salary_id')->nullable();
 
+            $table->unsignedBigInteger('document_group')->index()->nullable();
             $table->string('label')->nullable();
             $table->double('debit')->default(0);
             $table->double('credit')->default(0);
