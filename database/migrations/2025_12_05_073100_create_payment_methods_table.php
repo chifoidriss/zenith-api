@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cash_account_id')->after('id')->nullable();
+            $table->unsignedBigInteger('cash_account_id')->nullable();
             $table->foreign('cash_account_id')->references('id')->on('chart_accounts')->nullOnDelete();
 
-            $table->unsignedBigInteger('suspense_account_id')->after('id')->nullable();
+            $table->unsignedBigInteger('suspense_account_id')->nullable();
             $table->foreign('suspense_account_id')->references('id')->on('chart_accounts')->nullOnDelete();
 
-            $table->unsignedBigInteger('profit_account_id')->after('id')->nullable();
+            $table->unsignedBigInteger('profit_account_id')->nullable();
             $table->foreign('profit_account_id')->references('id')->on('chart_accounts')->nullOnDelete();
 
-            $table->unsignedBigInteger('loss_account_id')->after('id')->nullable();
+            $table->unsignedBigInteger('loss_account_id')->nullable();
             $table->foreign('loss_account_id')->references('id')->on('chart_accounts')->nullOnDelete();
 
             $table->string('name');

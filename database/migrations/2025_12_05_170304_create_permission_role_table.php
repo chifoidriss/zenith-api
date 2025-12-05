@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('warehouses', function (Blueprint $table) {
+        Schema::create('permission_role', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('emplacement_id')->constrained();
-            $table->string('name');
-            $table->string('short_name')->nullable();
-            $table->string('description')->nullable();
+            $table->foreignId('permission_id')->constrained();
+            $table->foreignId('role_id')->constrained();
+            $table->unsignedTinyInteger('value')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('warehouses');
+        Schema::dropIfExists('permission_role');
     }
 };
