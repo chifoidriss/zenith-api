@@ -182,6 +182,7 @@ class OAuthService
         array $tokenData,
         array $companyData,
     ): Company {
+        // dd($tokenData);
         return Company::updateOrCreate(
             ["id" => $companyId],
             [
@@ -193,7 +194,8 @@ class OAuthService
                     ($companyData["logoUrl"] ?? null),
                 "access_token" => $tokenData["access_token"],
                 "refresh_token" => $tokenData["refresh_token"],
-                "token_expires_at" => now()->addMinutes($tokenData["expires_in_minutes"]),
+                // "token_expires_at" => now()->addMinutes($tokenData["expires_in_minutes"]),
+                "token_expires_at" => now()->addMinutes(60),
                 "authorization_code" => $code,
                 "phone" =>
                     $companyData["metadata"]["contact"] ??

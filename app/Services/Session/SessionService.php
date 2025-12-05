@@ -132,8 +132,9 @@ class SessionService
      */
     public function getCurrentCompanyId(): ?string
     {
-        $token = Cookie::get(self::SESSION_COOKIE_NAME);
-
+        // $token = Cookie::get(self::SESSION_COOKIE_NAME);
+        $token = request()->company_id;
+        return $token;
         if (! $token) {
             return null;
         }
@@ -155,7 +156,8 @@ class SessionService
     public function getAuthenticatedCompany(): ?Company
     {
         $companyId = $this->getCurrentCompanyId();
-
+        // $companyId = request()->company_id;
+        // dd(request()->company_id);
         if (! $companyId) {
             return null;
         }
