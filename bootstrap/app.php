@@ -14,6 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'auth.genuka' => \App\Http\Middleware\AuthenticateGenuka::class,
+             'log' => \App\Http\Middleware\Log::class,
+             'permis' => \App\Http\Middleware\Permission::class,
         ]);
 
         // Use custom EncryptCookies middleware to exclude genuka_session
