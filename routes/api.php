@@ -7,6 +7,9 @@ use App\Http\Controllers\Auth\MeController;
 use App\Http\Controllers\Auth\RefreshController;
 use App\Http\Controllers\Auth\WebhookController;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +34,27 @@ Route::prefix('auth')->group(function () {
 
     // Webhook route
     Route::post('/webhook', WebhookController::class)->name('auth.webhook');
+});
+
+Route::middleware(['auth:sanctum', 'log'])
+    ->namespace('App\Http\Controllers')
+    ->group(function () {
+    $pages = scandir(base_path('routes/modules'));
+
+    Route::get('countries', 'Account\AccountController@countries');
+    Route::get('print/{type}/{id}', 'ExportController@printToPDF');
+    
+    foreach ($pages as $filename) {
+        if (Str::endsWith($filename, '.php')) {
+            require base_path("routes/modules/$filename");
+        }
+    }
+});
+
+Route::get('a', function () {
+    return Carbon::parse('2024-02-01')->lastOfMonth();
+});
+
+Route::get('header', function (Request $request) {
+    return response()->json(request()->header('enterprise'));
 });
