@@ -25,6 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('transfer_id')->nullable();
             $table->unsignedBigInteger('taxe_id')->nullable();
             $table->unsignedBigInteger('warehouse_id')->nullable();
+            $table->unsignedBigInteger('salary_id')->nullable();
 
             $table->string('label')->nullable();
             $table->double('debit')->default(0);
@@ -38,6 +39,7 @@ return new class extends Migration
             $table->foreign('transfer_id')->references('id')->on('transfers')->nullOnDelete();
             $table->foreign('taxe_id')->references('id')->on('taxes')->nullOnDelete();
             $table->foreign('warehouse_id')->references('id')->on('warehouses')->nullOnDelete();
+            $table->foreign('salary_id')->references('id')->on('salaries')->nullOnDelete();
         });
     }
 

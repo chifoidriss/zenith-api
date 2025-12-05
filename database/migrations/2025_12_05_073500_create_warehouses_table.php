@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chart_accounts', function (Blueprint $table) {
+        Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('account_type_id')->nullable();
-            $table->foreign('account_type_id')->references('id')->on('account_types')->nullOnDelete();
-            $table->string('code')->unique();
             $table->string('name');
+            $table->string('location')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
         });
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('chart_accounts');
+        Schema::dropIfExists('warehouses');
     }
 };

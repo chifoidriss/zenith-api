@@ -1,0 +1,44 @@
+
+  Dropping all tables  193.11ms DONE
+
+   INFO  Preparing database.  
+
+  Creating migration table  9.69ms DONE
+
+   INFO  Running migrations.  
+
+  0001_01_01_000000_create_users_table  61.44ms DONE
+  0001_01_01_000001_create_cache_table  12.54ms DONE
+  0001_01_01_000002_create_jobs_table  113.73ms DONE
+  2025_11_22_024926_create_companies_table  34.79ms DONE
+  2025_11_22_025926_create_personal_access_tokens_table  62.82ms DONE
+  2025_12_05_053000_create_units_table  59.05ms DONE
+  2025_12_05_053100_create_categories_table  37.76ms DONE
+  2025_12_05_053200_create_devises_table  7.24ms DONE
+  2025_12_05_053240_create_account_types_table  99.48ms DONE
+  2025_12_05_053247_create_chart_accounts_table  49.51ms DONE
+  2025_12_05_053300_create_partners_table  30.66ms DONE
+  2025_12_05_053353_create_invoices_table  78.80ms DONE
+  2025_12_05_053533_create_absences_table  12.07ms FAIL
+
+   BadMethodCallException 
+
+  Method Illuminate\Database\Schema\Blueprint::unsignedFloat does not exist.
+
+  at vendor\laravel\framework\src\Illuminate\Macroable\Traits\Macroable.php:115
+    111▕      */
+    112▕     public function __call($method, $parameters)
+    113▕     {
+    114▕         if (! static::hasMacro($method)) {
+  ➜ 115▕             throw new BadMethodCallException(sprintf(
+    116▕                 'Method %s::%s does not exist.', static::class, $method
+    117▕             ));
+    118▕         }
+    119▕
+
+  1   database\migrations\2025_12_05_053533_create_absences_table.php:20
+      Illuminate\Database\Schema\Blueprint::__call("unsignedFloat")
+
+  2   vendor\laravel\framework\src\Illuminate\Database\Schema\Builder.php:475
+      Illuminate\Database\Migrations\Migration@anonymous\C:\Users\jacqu\Desktop\genuka\zenith-api\database\migrations\2025_12_05_053533_create_absences_table.php:7$142::{closure:Illuminate\Database\Migrations\Migration@anonymous\C:\Users\jacqu\Desktop\genuka\zenith-api\database\migrations\2025_12_05_053533_create_absences_table.php:7$142::up():14}(Object(Illuminate\Database\Schema\Blueprint))
+

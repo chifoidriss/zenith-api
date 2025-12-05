@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('absences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('partner_id')->constrained();
+            $table->unsignedBigInteger('partner_id');
+            $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');
             $table->string('reason')->nullable();
             $table->date('start_date');
             $table->date('end_date')->nullable();
-            $table->unsignedFloat('amount')->default(0);
+            $table->decimal('amount', 10, 2)->default(0);
             $table->boolean('justified')->default(false);
             $table->timestamps();
         });

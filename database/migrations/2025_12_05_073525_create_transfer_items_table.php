@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('article_id')->constrained();
             $table->foreignId('unit_id')->constrained();
             $table->unsignedInteger('qty')->default(0);
-            $table->unsignedFloat('price')->nullable();
+            $table->decimal('price', 10, 2)->nullable();
             $table->timestamps();
         });
     }

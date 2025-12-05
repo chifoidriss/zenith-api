@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('loan_id')->constrained();
             $table->date('pay_date');
-            $table->unsignedFloat('amount')->default(0);
+            $table->decimal('amount', 10, 2)->default(0);
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('invoice_id')->constrained();
             $table->text('reason')->nullable();
             $table->date('start_date');
-            $table->unsignedFloat('amount')->default(0);
+            $table->decimal('amount', 10, 2)->default(0);
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

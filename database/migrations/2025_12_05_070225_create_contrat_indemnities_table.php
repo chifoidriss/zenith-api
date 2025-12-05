@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('indemnity_id')->constrained();
             $table->foreignId('contract_id')->constrained();
-            $table->unsignedFloat('value')->default(0);
+            $table->decimal('value', 10, 2)->default(0);
             $table->timestamps();
         });
     }

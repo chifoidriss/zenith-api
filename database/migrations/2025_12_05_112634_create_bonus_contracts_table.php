@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('loans', function (Blueprint $table) {
+        Schema::create('bonus_contract', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('bonus_id')->constrained();
             $table->foreignId('contract_id')->constrained();
-            $table->foreignId('partner_id')->constrained();
-            $table->foreignId('invoice_id')->constrained();
-            $table->text('reason')->nullable();
-            $table->date('start_date');
-            $table->decimal('amount', 10, 2)->default(0);
-            $table->unsignedSmallInteger('months')->default(1);
-            $table->boolean('status')->default(false);
+            $table->decimal('value', 10, 2)->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('loans');
+        Schema::dropIfExists('bonus_contract');
     }
 };

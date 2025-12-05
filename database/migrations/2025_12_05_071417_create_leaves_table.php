@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('partner_id')->constrained();
             $table->foreignId('leaving_type_id')->constrained();
             $table->string('observation')->nullable();
-            $table->unsignedFloat('amount')->default(0);
+            $table->decimal('amount', 10, 2)->default(0);
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->boolean('payed')->default(false);

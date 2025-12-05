@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('partner_id')->nullable();
+            $table->foreign('partner_id')->references('id')->on('partners')->nullOnDelete();
+
+            $table->unsignedBigInteger('devise_id')->nullable();
+            $table->foreign('devise_id')->references('id')->on('devises')->nullOnDelete();
+
+            $table->string('reference')->unique();
+            $table->date('date');
+            $table->date('due_date')->nullable();
+            $table->double('total')->default(0);
+            $table->boolean('status')->default(false); // Paid or not
+            $table->string('document')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

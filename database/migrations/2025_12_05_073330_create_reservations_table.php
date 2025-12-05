@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('invoice_id')->constrained();
             $table->foreignId('article_id')->constrained();
             $table->foreignId('unit_id')->constrained();
-            $table->unsignedFloat('qty')->nullable();
+            $table->decimal('qty', 10, 2)->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->double('price')->nullable();

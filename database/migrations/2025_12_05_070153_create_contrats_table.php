@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('observation')->nullable();
             $table->date('start_date');
             $table->date('end_date')->nullable();
-            $table->unsignedFloat('salary')->default(0);
+            $table->decimal('salary', 10, 2)->default(0);
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

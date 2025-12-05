@@ -25,6 +25,18 @@ return new class extends Migration
             $table->unsignedBigInteger('purchase_unit_id')->nullable();
             $table->foreign('purchase_unit_id')->references('id')->on('units')->nullOnDelete();
 
+            $table->unsignedBigInteger('product_account_id')->nullable();
+            $table->foreign('product_account_id')->references('id')->on('chart_accounts')->nullOnDelete();
+
+            $table->unsignedBigInteger('expense_account_id')->nullable();
+            $table->foreign('expense_account_id')->references('id')->on('chart_accounts')->nullOnDelete();
+
+            $table->unsignedBigInteger('stock_account_id')->nullable();
+            $table->foreign('stock_account_id')->references('id')->on('chart_accounts')->nullOnDelete();
+
+            $table->unsignedBigInteger('commodity_account_id')->nullable();
+            $table->foreign('commodity_account_id')->references('id')->on('chart_accounts')->nullOnDelete();
+
             $table->string('name');
             $table->enum('type', ['STOCKABLE', 'CONSUMABLE', 'SERVICE', 'ROOM', 'MENU'])->index()->nullable();
             $table->string('reference', 100)->index()->nullable();
@@ -32,8 +44,8 @@ return new class extends Migration
             $table->string('tags', 100)->index()->nullable();
             $table->double('price')->default(0);
             $table->double('cost')->default(0);
-            $table->unsignedFloat('weight')->nullable();
-            $table->unsignedFloat('volume')->nullable();
+            $table->decimal('weight', 10, 2)->nullable();
+            $table->decimal('volume', 10, 2)->nullable();
             $table->longText('image_path')->nullable();
             $table->boolean('can_sale')->default(false);
             $table->boolean('can_purchase')->default(false);

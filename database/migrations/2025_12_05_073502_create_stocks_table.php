@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('warehouse_id')->constrained();
             $table->foreignId('article_id')->constrained();
             $table->foreignId('unit_id')->constrained();
-            $table->unsignedFloat('qty')->default(0);
-            $table->unsignedFloat('qty_min')->default(0);
+            $table->decimal('qty', 10, 2)->default(0);
+            $table->decimal('qty_min', 10, 2)->default(0);
             $table->double('price')->default(0);
             $table->double('cost')->default(0);
             $table->timestamps();
