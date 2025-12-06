@@ -58,12 +58,13 @@ if (! function_exists('checkValidity')) {
             $start_date = $item->start_date;
             $end_date = $item->start_date;
         } else {
+            $qty = intval($item->qty);
             if($calcul == 'D') {
                 $start_date = Carbon::parse($item->start_date.' 12:00:00');
-                $end_date = Carbon::parse($item->start_date.' 14:00:00')->addDays($item->qty)->subMinute();
+                $end_date = Carbon::parse($item->start_date.' 14:00:00')->addDays($qty)->subMinute();
             } elseif($calcul == 'H') {
                 $start_date = Carbon::parse($item->start_date.' '.$item->start_time);
-                $end_date = Carbon::parse($item->start_date.' '.$item->start_time)->addHours($item->qty)->subMinute();
+                $end_date = Carbon::parse($item->start_date.' '.$item->start_time)->addHours($qty)->subMinute();
             }
         }
 
