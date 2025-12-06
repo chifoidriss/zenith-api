@@ -35,7 +35,7 @@ class ExportController extends Controller
         }
 
         $society = Society::first();
-        $fileName = strtoupper($data->reference)."-".time().".pdf";
+        $fileName = strtoupper($data->id)."-".time().".pdf";
         $path = 'documents/'.Str::plural($type).'/'.$fileName;
 
         $pdf = Pdf::loadView("pdfs.$type", compact("data", 'society'))->save($path, 'public');
