@@ -53,6 +53,8 @@ Route::middleware(['auth:sanctum', 'log'])
     }
 });
 
+// Route::get('print/{type}/{id}', 'App\Http\Controllers\ExportController@printToPDF');
+
 Route::get('a', function () {
     return Carbon::parse('2024-02-01')->lastOfMonth();
 });

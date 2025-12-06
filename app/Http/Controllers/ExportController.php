@@ -13,6 +13,7 @@ use App\Models\Transfer;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 class ExportController extends Controller
 {
@@ -39,6 +40,8 @@ class ExportController extends Controller
 
         $pdf = Pdf::loadView("pdfs.$type", compact("data", 'society'))->save($path, 'public');
 
-        return ['url' => asset('storage/'.$path)];
+        return Storage::download($path);
+
+        // return ['url' => asset('storage/'.$path)];
     }
 }

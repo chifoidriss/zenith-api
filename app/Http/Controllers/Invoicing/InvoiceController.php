@@ -17,6 +17,7 @@ use App\Models\Warehouse;
 use App\Models\ChartAccount;
 use App\Models\InvoiceLog;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -454,7 +455,7 @@ class InvoiceController extends Controller
             $invoice->save();
 
             InvoiceLog::create([
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'invoice_id' => $invoice->id,
                 'action' => $request->id ? 'UPDATE' : 'CREATE',
                 'data' => json_encode($invoice),
@@ -492,7 +493,7 @@ class InvoiceController extends Controller
         ])->whereDoesntHave('payments')->firstOrFail();
 
         InvoiceLog::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             // 'invoice_id' => $invoice->id,
             'action' => 'DELETE',
             'document' => $invoice->reference,
@@ -602,7 +603,7 @@ class InvoiceController extends Controller
                 $invoice->save();
 
                 InvoiceLog::create([
-                    'user_id' => auth()->id(),
+                    'user_id' => Auth::id(),
                     'invoice_id' => $invoice->id,
                     'action' => 'CONFIRM',
                     'document' => $invoice->reference,
@@ -671,7 +672,7 @@ class InvoiceController extends Controller
         $newInvoice->save();
 
         InvoiceLog::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'invoice_id' => $newInvoice->id,
             'action' => 'CREATE',
             'data' => json_encode($newInvoice),
@@ -726,7 +727,7 @@ class InvoiceController extends Controller
         $invoice->save();
 
         InvoiceLog::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'invoice_id' => $invoice->id,
             'action' => 'UPDATE',
             'data' => json_encode($invoice),
