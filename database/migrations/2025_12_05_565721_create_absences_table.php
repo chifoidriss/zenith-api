@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contracts', function (Blueprint $table) {
+        Schema::create('absences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('partner_id')->constrained();
-            $table->foreignId('contract_type_id')->constrained();
-            $table->foreignId('post_id')->constrained();
-            $table->string('observation')->nullable();
+            $table->string('reason')->nullable();
             $table->date('start_date');
             $table->date('end_date')->nullable();
-            $table->decimal('salary', 10, 2)->default(0);
-            $table->boolean('status')->default(false);
+            $table->float('amount')->unsigned()->default(0);
+            $table->boolean('justified')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contracts');
+        Schema::dropIfExists('absences');
     }
 };

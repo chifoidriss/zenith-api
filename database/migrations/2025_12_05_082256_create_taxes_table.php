@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('calcul', ['FIXED', 'PERCENT']);
             $table->enum('type', ['IN', 'OUT']);
-            $table->decimal('value', 10, 2);
+            $table->float('value')->unsigned();
             $table->string('label')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();

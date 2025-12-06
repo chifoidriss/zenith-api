@@ -13,20 +13,24 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('partner_id')->nullable();
-            $table->foreign('partner_id')->references('id')->on('partners')->nullOnDelete();
-
             $table->unsignedBigInteger('devise_id')->nullable();
             $table->foreign('devise_id')->references('id')->on('devises')->nullOnDelete();
 
-            $table->string('reference')->unique();
-            $table->date('date');
+            $table->unsignedBigInteger('partner_id')->nullable();
+            $table->foreign('partner_id')->references('id')->on('partners')->nullOnDelete();
+
+            $table->enum('type', ['INVOICE', 'REFUND'])->index();
+            $table->string('source', 50)->index();
+            $table->string('reference', 50)->index();
+            $table->date('billing_date')->nullable();
             $table->date('due_date')->nullable();
-            $table->double('total')->default(0);
-            $table->boolean('status')->default(false); // Paid or not
-            $table->string('document')->nullable();
-            $table->text('notes')->nullable();
+            $table->double('subtotal')->nullable();
+            $table->double('total')->nullable();
+            $table->double('discount')->nullable();
+            $table->boolean('status')->default(0);
             $table->string('label')->nullable();
+            $table->longText('taxes')->nullable();
+            $table->string('document', 255)->nullable();
             $table->timestamps();
         });
     }

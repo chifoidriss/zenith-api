@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('absences', function (Blueprint $table) {
+        Schema::create('leaves', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('partner_id');
-            $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');
-            $table->string('reason')->nullable();
+            $table->foreignId('partner_id')->constrained();
+            $table->foreignId('leaving_type_id')->constrained();
+            $table->string('observation')->nullable();
+            $table->float('amount')->unsigned()->default(0);
             $table->date('start_date');
             $table->date('end_date')->nullable();
-            $table->decimal('amount', 10, 2)->default(0);
-            $table->boolean('justified')->default(false);
+            $table->boolean('payed')->default(false);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absences');
+        Schema::dropIfExists('leaves');
     }
 };

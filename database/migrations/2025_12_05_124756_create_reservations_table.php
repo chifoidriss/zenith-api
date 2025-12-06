@@ -11,21 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('invoice_items', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('invoice_id')->constrained();
             $table->foreignId('article_id')->constrained();
             $table->foreignId('unit_id')->constrained();
-            $table->decimal('qty', 10, 2)->nullable();
+            $table->float('qty')->unsigned()->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
             $table->double('price')->nullable();
             $table->string('discount')->nullable();
             $table->string('label')->nullable();
-	
             $table->double('subtotal')->nullable();
-            $table->enum('calcul', ['D', 'H'])->nullable();
-            $table->dateTime('start_date')->nullable();
-            $table->dateTime('end_date')->nullable();
-            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('invoice_items');
+        Schema::dropIfExists('reservations');
     }
 };

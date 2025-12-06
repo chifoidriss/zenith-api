@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('leaves', function (Blueprint $table) {
+        Schema::create('loans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('contract_id')->constrained();
             $table->foreignId('partner_id')->constrained();
-            $table->foreignId('leaving_type_id')->constrained();
-            $table->string('observation')->nullable();
-            $table->decimal('amount', 10, 2)->default(0);
+            $table->foreignId('invoice_id')->constrained();
+            $table->text('reason')->nullable();
             $table->date('start_date');
-            $table->date('end_date')->nullable();
-            $table->boolean('payed')->default(false);
+            $table->float('amount')->unsigned()->default(0);
+            $table->unsignedSmallInteger('months')->default(1);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('leaves');
+        Schema::dropIfExists('loans');
     }
 };

@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('invoice_id')->constrained();
+            $table->foreignId('warehouse_id')->constrained();
             $table->foreignId('article_id')->constrained();
             $table->foreignId('unit_id')->constrained();
-            $table->decimal('qty', 10, 2)->nullable();
-            $table->dateTime('start_date')->nullable();
-            $table->dateTime('end_date')->nullable();
-            $table->double('price')->nullable();
-            $table->string('discount')->nullable();
-            $table->string('label')->nullable();
-            $table->double('subtotal')->nullable();
+            $table->float('qty')->unsigned()->default(0);
+            $table->float('qty_min')->unsigned()->default(0);
+            $table->double('price')->default(0);
+            $table->double('cost')->default(0);
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('stocks');
     }
 };

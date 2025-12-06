@@ -44,8 +44,8 @@ return new class extends Migration
             $table->string('tags', 100)->index()->nullable();
             $table->double('price')->default(0);
             $table->double('cost')->default(0);
-            $table->decimal('weight', 10, 2)->nullable();
-            $table->decimal('volume', 10, 2)->nullable();
+            $table->float('weight')->unsigned()->nullable();
+            $table->float('volume')->unsigned()->nullable();
             $table->longText('image_path')->nullable();
             $table->boolean('can_sale')->default(false);
             $table->boolean('can_purchase')->default(false);

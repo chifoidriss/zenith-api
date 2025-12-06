@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transfer_items', function (Blueprint $table) {
+        Schema::create('bonus_salary', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transfer_id')->constrained();
-            $table->foreignId('article_id')->constrained();
-            $table->foreignId('unit_id')->constrained();
-            $table->unsignedInteger('qty')->default(0);
-            $table->decimal('price', 10, 2)->nullable();
+            $table->foreignId('bonus_id')->constrained();
+            $table->foreignId('salary_id')->constrained();
+            $table->float('value')->unsigned()->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transfer_items');
+        Schema::dropIfExists('bonus_salary');
     }
 };

@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('loan_details', function (Blueprint $table) {
+        Schema::create('taxe_unit', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('loan_id')->constrained();
-            $table->date('pay_date');
-            $table->decimal('amount', 10, 2)->default(0);
+            $table->foreignId('taxe_id')->constrained();
+            $table->foreignId('unit_id')->constrained();
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('loan_details');
+        Schema::dropIfExists('taxe_unit');
     }
 };

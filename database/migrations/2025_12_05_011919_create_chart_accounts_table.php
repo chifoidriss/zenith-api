@@ -8,25 +8,28 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('chart_accounts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('account_type_id')->nullable();
-            $table->foreign('account_type_id')->references('id')->on('account_types')->nullOnDelete();
-            $table->string('code')->unique();
+            $table->foreignId('account_type_id')->constrained();
+            $table->unsignedInteger('code')->unique();
             $table->string('name');
-            $table->string('description')->nullable();
-            $table->boolean('allow_reconciliation')->nullable();
+            $table->boolean('allow_reconciliation')->default(false);
+            $table->boolean('deprecated')->default(false);
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('chart_accounts');
     }
