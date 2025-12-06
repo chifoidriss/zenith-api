@@ -350,9 +350,9 @@ class InvoiceController extends Controller
         $invoiceType = $invoice_type == 'invoices'?'INVOICE':'REFUND';
         $source = invoiceSource($type);
 
-        // DB::beginTransaction();
+        DB::beginTransaction();
 
-        // try {
+        try {
             $invoice = Invoice::whereDoesntHave('payments')->firstOrNew([
                 'source' => $source,
                 'type' => $invoiceType,
@@ -465,20 +465,20 @@ class InvoiceController extends Controller
             ]);
 
             # All is good
-            // DB::commit();
+            DB::commit();
 
             return $invoice;
             // return $this->show($invoice_type, $type, $invoice->id);
-        // } catch (Throwable $ex) {
-        //     DB::rollBack();
+        } catch (Throwable $ex) {
+            DB::rollBack();
 
-        //     return response([
-        //         'error' => 'Erreur interne du serveur',
-        //         'message' => $ex,
-        //     ], 500);
+            return response([
+                'error' => 'Erreur interne du serveur',
+                'message' => $ex,
+            ], 500);
 
-        //     throw $ex;
-        // }
+            throw $ex;
+        }
     }
 
     public function destroy($invoice_type, $type, $id)
