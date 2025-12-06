@@ -350,9 +350,9 @@ class InvoiceController extends Controller
         $invoiceType = $invoice_type == 'invoices'?'INVOICE':'REFUND';
         $source = invoiceSource($type);
 
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
-        try {
+        // try {
             $invoice = Invoice::whereDoesntHave('payments')->firstOrNew([
                 'source' => $source,
                 'type' => $invoiceType,
@@ -421,18 +421,18 @@ class InvoiceController extends Controller
                 if($invoice->source == 'HOSTING') {
                     $total_tva = 0;
                     $calcul = $item['calcul'];
-                    $qty = intval($item->qty);
+                    $qt = intval($item["qty"]);
                     if($calcul == 'D') {
                         $start_date = Carbon::parse($item["start_date"].' 12:00:00');
-                        $end_date = Carbon::parse($item["start_date"].' 14:00:00')->addDays($qty);
+                        $end_date = Carbon::parse($item["start_date"].' 14:00:00')->addDays($qt);
 
                         if($item["subtotal"] > 0) {
-                            $total_tva = 1000 * $qty;
+                            $total_tva = 1000 * $qt;
                             $total_taxe += $total_tva;
                         }
                     } elseif($calcul == 'H') {
                         $start_date = Carbon::parse($item["start_date"].' '.$item["start_time"]);
-                        $end_date = $start_date->copy()->addHours($qty);
+                        $end_date = $start_date->copy()->addHours($qt);
                     }
 
                     $invoiceItem = $invoiceItem->fill([
@@ -465,20 +465,20 @@ class InvoiceController extends Controller
             ]);
 
             # All is good
-            DB::commit();
+            // DB::commit();
 
             return $invoice;
             // return $this->show($invoice_type, $type, $invoice->id);
-        } catch (Throwable $ex) {
-            DB::rollBack();
+        // } catch (Throwable $ex) {
+        //     DB::rollBack();
 
-            return response([
-                'error' => 'Erreur interne du serveur',
-                'message' => $ex,
-            ], 500);
+        //     return response([
+        //         'error' => 'Erreur interne du serveur',
+        //         'message' => $ex,
+        //     ], 500);
 
-            throw $ex;
-        }
+        //     throw $ex;
+        // }
     }
 
     public function destroy($invoice_type, $type, $id)
