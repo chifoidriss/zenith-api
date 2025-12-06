@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="{{ asset('assets/pdfs/bootstrap-utilities.min.css') }}">
 
     <style>
+        {!! $css !!}
+    </style>
+
+    <style>
         .bg {
             background-position: center;
             background-repeat: no-repeat;

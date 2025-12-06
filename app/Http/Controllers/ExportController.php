@@ -34,13 +34,17 @@ class ExportController extends Controller
             $data = Payment::findOrFail($id);
         }
 
+        $css = file_get_contents(storage_path('pdfs/bootstrap.min.css'));
+        $css .= file_get_contents(storage_path('pdfs/bootstrap-reboot.min.css'));
+        $css .= file_get_contents(storage_path('pdfs/bootstrap-utilities.min.css'));
+
         $society = Society::first();
         $fileName = strtoupper($data->id)."-".time().".pdf";
         $path = 'documents/'.Str::plural($type).'/'.$fileName;
 
-        $pdf = Pdf::loadView("pdfs.$type", compact("data", 'society'))->save($path, 'public');
+        $pdf = Pdf::loadView("pdfs.$type", compact("data", 'society', 'css'))->save($path, 'public');
 
-        return Storage::download($path);
+        return Storage::download('app/public/'.$path);
 
         // return ['url' => asset('storage/'.$path)];
     }
